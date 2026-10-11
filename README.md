@@ -8,7 +8,7 @@ Run with Node.js 22 or later. Set `OPENAI_API_KEY` in the server environment, th
 
 Open `http://127.0.0.1:3000`. Without a key, the design tools, JSON editor, and local History still work; image generation reports that setup is needed. Generated images and saved prompts are stored in this browser's IndexedDB. The image provider may not match every detail exactly.
 
-The `manifest.webmanifest` and icon files support mobile home-screen installation where the browser permits it. A public deployment also needs HTTPS and an appropriately configured server environment.
+The `manifest.webmanifest`, branded icons, install button, and `sw.js` support mobile home-screen installation and offline access to the editor shell. On iPhone, use the browser Share menu and **Add to Home Screen**; on Android, use **Install app** or **Add to Home screen** if the browser does not show its install prompt. A public deployment needs HTTPS. Image generation still requires an appropriately configured server environment and network access.
 
 The original React/Vinext site source is provided separately as `original-site-source.zip` in the parent outputs folder. The plain-web edition is a conversion for readability; the archive preserves the exact framework implementation.
 

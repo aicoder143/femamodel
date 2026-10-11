@@ -750,4 +750,36 @@ function startStudio() {
     loadVersionsFromDatabase().then((versions) => { state.versions = versions; sync(); }).catch(() => {});
     fetch('./api/status').then((response) => response.json()).then((result) => { state.keyReady = Boolean(result.configured); byId('status-dot').classList.toggle('ready', state.keyReady); setText('api-status', state.keyReady ? 'Studio ready' : 'API setup needed'); }).catch(() => { setText('api-status', location.hostname.endsWith('.github.io') ? 'Pages preview mode' : 'API setup needed'); });
 }
-if (typeof document !== 'undefined') startStudio();
+function setupInstallation() {
+    const card = byId('install-card');
+    const help = byId('install-help');
+    const standalone = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    const appleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent) || /Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+    const mobile = appleMobile || /Android/i.test(navigator.userAgent);
+    let installPrompt = null;
+    if (mobile && !standalone()) card.hidden = false;
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        installPrompt = event;
+        if (!standalone()) card.hidden = false;
+    });
+    window.addEventListener('appinstalled', () => { card.hidden = true; installPrompt = null; });
+    byId('install-app').addEventListener('click', async () => {
+        if (installPrompt) {
+            const prompt = installPrompt;
+            installPrompt = null;
+            await prompt.prompt();
+            const choice = await prompt.userChoice;
+            if (choice.outcome === 'accepted') card.hidden = true;
+            return;
+        }
+        byId('install-help-steps').textContent = appleMobile
+            ? 'In your browser, tap Share, then choose Add to Home Screen. Confirm the name Femamodel and tap Add. Open it from the new pink F icon on your home screen.'
+            : 'Open your browser menu and choose Install app or Add to Home screen. Confirm to place the pink Femamodel icon on your home screen.';
+        help.showModal();
+    });
+    byId('close-install-help').addEventListener('click', () => help.close());
+    help.addEventListener('click', (event) => { if (event.target === help) help.close(); });
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+if (typeof document !== 'undefined') { startStudio(); setupInstallation(); }

@@ -185,6 +185,58 @@ button {
   margin: 0 0 25px;
 }
 
+.install-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin: -7px 0 20px;
+  border: 1px solid #f3bdd9;
+  border-radius: 9px;
+  background: #fff0f7;
+}
+
+.install-card-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #d60078;
+  color: #fff;
+  font: 700 17px 'Playfair Display',serif;
+}
+
+.install-card div { min-width: 0; flex: 1; }
+.install-card strong { display: block; color: #6e1748; font-size: 11px; }
+.install-card small { display: block; color: #8b6179; font-size: 10px; line-height: 1.4; margin-top: 2px; }
+.install-card button {
+  flex: none;
+  border: 0;
+  border-radius: 5px;
+  padding: 9px 10px;
+  background: #d60078;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.install-help {
+  width: min(420px,calc(100vw - 32px));
+  border: 1px solid #f3bdd9;
+  border-radius: 12px;
+  padding: 22px;
+  color: #2b1830;
+  box-shadow: 0 20px 60px rgba(67,15,45,.25);
+}
+.install-help::backdrop { background: rgba(30,5,22,.48); }
+.install-help-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.install-help h2 { margin: 0; font: 500 23px 'Playfair Display',serif; }
+.install-help-head button { border: 0; background: transparent; color: #8b6179; font-size: 26px; line-height: 1; }
+.install-help p { font-size: 13px; line-height: 1.6; }
+.install-help-note { color: #806b7a; border-top: 1px solid #f3d9e7; padding-top: 12px; margin-bottom: 0; }
+
 .tab-switch {
   display: flex;
   border-bottom: 1px solid var(--line);

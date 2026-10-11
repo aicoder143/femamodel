@@ -20,7 +20,8 @@ const allowedFiles = new Map([
     ['/apple-touch-icon.png', ['apple-touch-icon.png', 'image/png']],
     ['/icon-192.png', ['icon-192.png', 'image/png']],
     ['/icon-512.png', ['icon-512.png', 'image/png']],
-    ['/manifest.webmanifest', ['manifest.webmanifest', 'application/manifest+json']]
+    ['/manifest.webmanifest', ['manifest.webmanifest', 'application/manifest+json']],
+    ['/sw.js', ['sw.js', 'text/javascript; charset=utf-8']]
 ]);
 function json(response, status, data) {
     response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
